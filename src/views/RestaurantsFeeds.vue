@@ -7,11 +7,12 @@
       <div class="col-md-6">
         <h3>最新餐廳</h3>
         <!-- 最新餐廳 NewestRestaurants -->
-        <NewestRestaurants v-bind:restaurants="restaurants" />
+        <NewestRestaurants :restaurants="restaurants" />
       </div>
       <div class="col-md-6">
         <!-- 最新評論 NewestComments-->
         <h3>最新評論</h3>
+        <NewestComments :comments="comments" />
       </div>
     </div>
   </div>
@@ -20,6 +21,7 @@
 <script>
 import NavTabs from "../components/NavTabs";
 import NewestRestaurants from "../components/NewestRestaurants";
+import NewestComments from "../components/NewestComments";
 const dummyData = {
   restaurants: [
     {
@@ -158,126 +160,6 @@ const dummyData = {
   ],
   comments: [
     {
-      id: 199,
-      text: null,
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T03:40:55.390Z",
-      updatedAt: "2020-01-19T03:40:55.390Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
-      id: 198,
-      text: "123",
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T02:53:27.112Z",
-      updatedAt: "2020-01-19T02:53:27.112Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
-      id: 197,
-      text: null,
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T02:52:32.773Z",
-      updatedAt: "2020-01-19T02:52:32.773Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
-      id: 196,
-      text: "try",
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T02:45:01.935Z",
-      updatedAt: "2020-01-19T02:45:01.935Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
-      id: 195,
-      text: "try it",
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T02:44:23.467Z",
-      updatedAt: "2020-01-19T02:44:23.467Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
-      id: 194,
-      text: "try",
-      UserId: 1,
-      RestaurantId: null,
-      createdAt: "2020-01-19T02:41:43.886Z",
-      updatedAt: "2020-01-19T02:41:43.886Z",
-      User: {
-        id: 1,
-        name: "root1",
-        email: "root@example.com",
-        password:
-          "$2a$10$alLLwv1Kn0tC9euHs6Llwen8uif7jQfU9DPaybXRuGn83ZfKzW56G",
-        isAdmin: true,
-        image: null,
-        createdAt: "2019-11-20T06:25:42.456Z",
-        updatedAt: "2019-11-25T06:53:28.542Z"
-      },
-      Restaurant: null
-    },
-    {
       id: 193,
       text: "test3test3",
       UserId: 2,
@@ -412,7 +294,8 @@ const dummyData = {
 export default {
   components: {
     NavTabs,
-    NewestRestaurants
+    NewestRestaurants,
+    NewestComments
   },
   data() {
     return {
