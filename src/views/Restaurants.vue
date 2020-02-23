@@ -15,6 +15,12 @@
     </div>
 
     <!-- 分頁標籤 RestaurantPagination -->
+    <RestaurantPagination
+      v-if="totalPage > 1"
+      :category-id="categoryId"
+      :current-page="currentPage"
+      :total-page="totalPage"
+    />
   </div>
 </template>
 
@@ -22,6 +28,7 @@
 import NavTabs from "../components/NavTabs";
 import RestaurantCard from "../components/RestaurantCard";
 import RestaurantsNavPills from "../components/RestaurantsNavPills";
+import RestaurantPagination from "../components/RestaurantsPagination";
 
 const dummyData = {
   restaurants: [
@@ -88,6 +95,134 @@ const dummyData = {
       },
       isFavorited: true,
       isLiked: true
+    },
+    {
+      id: 52,
+      name: "發大財漢堡",
+      tel: "12345678",
+      address: "高雄市",
+      opening_hours: "00:00",
+      description: "123",
+      image: "https://i.imgur.com/CaeM9rg.jpg",
+      viewCounts: 27,
+      createdAt: "2019-11-22T06:50:58.472Z",
+      updatedAt: "2020-02-11T03:49:29.072Z",
+      CategoryId: 6,
+      Category: {
+        id: 6,
+        name: "美式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: false,
+      isLiked: true
+    },
+    {
+      id: 145,
+      name: "啃的雞",
+      tel: "123",
+      address: "啃的雞總部",
+      opening_hours: "03:33",
+      description: "",
+      image: null,
+      viewCounts: null,
+      createdAt: "2020-02-16T05:09:24.297Z",
+      updatedAt: "2020-02-16T05:09:24.297Z",
+      CategoryId: 6,
+      Category: {
+        id: 6,
+        name: "美式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: false,
+      isLiked: false
+    },
+    {
+      id: 15,
+      name: "奇昂地餐酒館",
+      tel: "1-573-027-3190",
+      address: "13538 Lula Roads",
+      opening_hours: "08:00",
+      description: "Ut ea repellat cumque illo sint. Possimus a magni ",
+      image:
+        "https://loremflickr.com/320/240/restaurant,food/?random=66.19683181847653",
+      viewCounts: 77,
+      createdAt: "2019-11-20T06:25:42.925Z",
+      updatedAt: "2020-02-16T05:36:07.120Z",
+      CategoryId: 7,
+      Category: {
+        id: 7,
+        name: "複合式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: true,
+      isLiked: true
+    },
+    {
+      id: 53,
+      name: "單單漢堡",
+      tel: "12345678",
+      address: "高雄市",
+      opening_hours: "00:00",
+      description: "123",
+      image: "https://i.imgur.com/CaeM9rg.jpg",
+      viewCounts: 27,
+      createdAt: "2019-11-22T06:50:58.472Z",
+      updatedAt: "2020-02-11T03:49:29.072Z",
+      CategoryId: 6,
+      Category: {
+        id: 6,
+        name: "美式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: false,
+      isLiked: true
+    },
+    {
+      id: 146,
+      name: "馬鈴薯熟了",
+      tel: "123",
+      address: "馬鈴薯市",
+      opening_hours: "03:33",
+      description: "",
+      image: null,
+      viewCounts: null,
+      createdAt: "2020-02-16T05:09:24.297Z",
+      updatedAt: "2020-02-16T05:09:24.297Z",
+      CategoryId: 6,
+      Category: {
+        id: 6,
+        name: "美式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: false,
+      isLiked: false
+    },
+    {
+      id: 16,
+      name: "勃根地小酒館",
+      tel: "1-573-027-3190",
+      address: "13538 Lula Roads",
+      opening_hours: "08:00",
+      description: "Ut ea repellat cumque illo sint. Possimus a magni ",
+      image:
+        "https://loremflickr.com/320/240/restaurant,food/?random=66.19683181847653",
+      viewCounts: 77,
+      createdAt: "2019-11-20T06:25:42.925Z",
+      updatedAt: "2020-02-16T05:36:07.120Z",
+      CategoryId: 7,
+      Category: {
+        id: 7,
+        name: "複合式料理",
+        createdAt: "2019-11-20T06:25:42.917Z",
+        updatedAt: "2019-11-20T06:25:42.917Z"
+      },
+      isFavorited: true,
+      isLiked: true
     }
   ],
   categories: [
@@ -115,7 +250,8 @@ export default {
   components: {
     NavTabs,
     RestaurantCard,
-    RestaurantsNavPills
+    RestaurantsNavPills,
+    RestaurantPagination
   },
   data() {
     return {
