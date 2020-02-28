@@ -73,6 +73,11 @@ const routes = [
     component: () => import("../views/AdminRestaurantEdit.vue")
   },
   {
+    path: "/user/:id/edit",
+    name: "user-edit",
+    component: () => import("../views/UserEdit.vue")
+  },
+  {
     path: "*",
     name: "not-found",
     component: NotFound
