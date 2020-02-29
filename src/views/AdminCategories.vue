@@ -145,7 +145,6 @@ export default {
   methods: {
     // 4. 定義 `fetchCategories` 方法，把 `dummyData` 帶入 Vue 物件
     fetchCategories() {
-      this.categories = dummyData.categories;
       this.categories = dummyData.categories.map(category => ({
         ...category,
         isEditing: false
