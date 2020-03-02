@@ -29,222 +29,9 @@ import NavTabs from "../components/NavTabs";
 import RestaurantCard from "../components/RestaurantCard";
 import RestaurantsNavPills from "../components/RestaurantsNavPills";
 import RestaurantPagination from "../components/RestaurantsPagination";
-
-const dummyData = {
-  restaurants: [
-    {
-      id: 51,
-      name: "發大財0121牛排",
-      tel: "12345678",
-      address: "高雄市",
-      opening_hours: "00:00",
-      description: "123",
-      image: "https://i.imgur.com/CaeM9rg.jpg",
-      viewCounts: 27,
-      createdAt: "2019-11-22T06:50:58.472Z",
-      updatedAt: "2020-02-11T03:49:29.072Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: true
-    },
-    {
-      id: 144,
-      name: "麥當當",
-      tel: "123",
-      address: "麥當勞總部",
-      opening_hours: "03:33",
-      description: "",
-      image: null,
-      viewCounts: null,
-      createdAt: "2020-02-16T05:09:24.297Z",
-      updatedAt: "2020-02-16T05:09:24.297Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: false
-    },
-    {
-      id: 14,
-      name: "Rahul Kilback",
-      tel: "1-573-027-3190",
-      address: "13538 Lula Roads",
-      opening_hours: "08:00",
-      description: "Ut ea repellat cumque illo sint. Possimus a magni ",
-      image:
-        "https://loremflickr.com/320/240/restaurant,food/?random=66.19683181847653",
-      viewCounts: 77,
-      createdAt: "2019-11-20T06:25:42.925Z",
-      updatedAt: "2020-02-16T05:36:07.120Z",
-      CategoryId: 7,
-      Category: {
-        id: 7,
-        name: "複合式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: true,
-      isLiked: true
-    },
-    {
-      id: 52,
-      name: "發大財漢堡",
-      tel: "12345678",
-      address: "高雄市",
-      opening_hours: "00:00",
-      description: "123",
-      image: "https://i.imgur.com/CaeM9rg.jpg",
-      viewCounts: 27,
-      createdAt: "2019-11-22T06:50:58.472Z",
-      updatedAt: "2020-02-11T03:49:29.072Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: true
-    },
-    {
-      id: 145,
-      name: "啃的雞",
-      tel: "123",
-      address: "啃的雞總部",
-      opening_hours: "03:33",
-      description: "",
-      image: null,
-      viewCounts: null,
-      createdAt: "2020-02-16T05:09:24.297Z",
-      updatedAt: "2020-02-16T05:09:24.297Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: false
-    },
-    {
-      id: 15,
-      name: "奇昂地餐酒館",
-      tel: "1-573-027-3190",
-      address: "13538 Lula Roads",
-      opening_hours: "08:00",
-      description: "Ut ea repellat cumque illo sint. Possimus a magni ",
-      image:
-        "https://loremflickr.com/320/240/restaurant,food/?random=66.19683181847653",
-      viewCounts: 77,
-      createdAt: "2019-11-20T06:25:42.925Z",
-      updatedAt: "2020-02-16T05:36:07.120Z",
-      CategoryId: 7,
-      Category: {
-        id: 7,
-        name: "複合式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: true,
-      isLiked: true
-    },
-    {
-      id: 53,
-      name: "單單漢堡",
-      tel: "12345678",
-      address: "高雄市",
-      opening_hours: "00:00",
-      description: "123",
-      image: "https://i.imgur.com/CaeM9rg.jpg",
-      viewCounts: 27,
-      createdAt: "2019-11-22T06:50:58.472Z",
-      updatedAt: "2020-02-11T03:49:29.072Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: true
-    },
-    {
-      id: 146,
-      name: "馬鈴薯熟了",
-      tel: "123",
-      address: "馬鈴薯市",
-      opening_hours: "03:33",
-      description: "",
-      image: null,
-      viewCounts: null,
-      createdAt: "2020-02-16T05:09:24.297Z",
-      updatedAt: "2020-02-16T05:09:24.297Z",
-      CategoryId: 6,
-      Category: {
-        id: 6,
-        name: "美式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: false,
-      isLiked: false
-    },
-    {
-      id: 16,
-      name: "勃根地小酒館",
-      tel: "1-573-027-3190",
-      address: "13538 Lula Roads",
-      opening_hours: "08:00",
-      description: "Ut ea repellat cumque illo sint. Possimus a magni ",
-      image:
-        "https://loremflickr.com/320/240/restaurant,food/?random=66.19683181847653",
-      viewCounts: 77,
-      createdAt: "2019-11-20T06:25:42.925Z",
-      updatedAt: "2020-02-16T05:36:07.120Z",
-      CategoryId: 7,
-      Category: {
-        id: 7,
-        name: "複合式料理",
-        createdAt: "2019-11-20T06:25:42.917Z",
-        updatedAt: "2019-11-20T06:25:42.917Z"
-      },
-      isFavorited: true,
-      isLiked: true
-    }
-  ],
-  categories: [
-    {
-      id: 6,
-      name: "美式料理",
-      createdAt: "2019-11-20T06:25:42.917Z",
-      updatedAt: "2019-11-20T06:25:42.917Z"
-    },
-    {
-      id: 7,
-      name: "複合式料理",
-      createdAt: "2019-11-20T06:25:42.917Z",
-      updatedAt: "2019-11-20T06:25:42.917Z"
-    }
-  ],
-  categoryId: "",
-  page: 1,
-  totalPage: [1, 2, 3, 4, 5],
-  prev: 1,
-  next: 2
-};
+// STEP 1：透過 import 匯入剛剛撰寫好用來呼叫 API 的方法
+import restaurantsAPI from "./../apis/restaurants";
+import { Toast } from "./../utils/helpers";
 
 export default {
   components: {
@@ -263,15 +50,43 @@ export default {
     };
   },
   created() {
-    this.fetchRestaurants();
+    // STEP 3：在 created 的時候呼叫 fetchRestaurants 方法
+    const { page, categoryId } = this.$route.query;
+    this.fetchRestaurants({
+      page,
+      categoryId
+    });
+  },
+  // 使用 beforeRouteUpdate 方法取得使用者路由變化
+  beforeRouteUpdate(to, from, next) {
+    const { page, categoryId } = to.query;
+    this.fetchRestaurants({ page, categoryId });
+    next();
   },
   methods: {
-    fetchRestaurants() {
-      this.categories = dummyData.categories;
-      this.catagoryId = dummyData.categoryId;
-      this.currentPage = dummyData.page;
-      this.restaurants = dummyData.restaurants;
-      this.totalPage = dummyData.totalPage.length;
+    async fetchRestaurants({ page = 1, categoryId = "" }) {
+      try {
+        // STEP 2：將 response 中的 data 和 statusText 取出
+        const { data, statusText } = await restaurantsAPI.getRestaurants({
+          page,
+          categoryId
+        });
+        // STEP 3：如果 statusText 不是 OK 的話則進入錯誤處理
+        if (statusText !== "OK") {
+          throw new Error(statusText);
+        }
+        // STEP 4：將從伺服器取得的 data 帶入 Vue 內
+        this.categories = data.categories;
+        this.categoryId = data.categoryId;
+        this.currentPage = data.page;
+        this.restaurants = data.restaurants;
+        this.totalPage = data.totalPage.length;
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法取得餐廳資料，請稍後再試"
+        });
+      }
     }
   }
 };
