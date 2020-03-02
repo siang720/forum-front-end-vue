@@ -7,7 +7,7 @@
       <div v-for="comment in comments" :key="comment.id">
         <h4>
           <router-link
-            :to="{ name: 'restaurant', params: { id: restaurant.id } }"
+            :to="{ name: 'restaurant', params: { id: comment.Restaurant.id } }"
           >
             {{ comment.Restaurant.name }}
           </router-link>
