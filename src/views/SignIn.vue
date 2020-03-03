@@ -77,7 +77,7 @@ export default {
         // 然後 return 不繼續往後執行
         if (!this.email || !this.password) {
           Toast.fire({
-            type: "warning",
+            icon: "warning",
             title: "請填入 email 和 password"
           });
           return;

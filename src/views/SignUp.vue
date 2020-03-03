@@ -60,7 +60,11 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
+      <button
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+        :disabled="isProcessing"
+      >
         Submit
       </button>
 
@@ -80,25 +84,65 @@
 </template>
 
 <script>
+import authorizationAPI from "../apis/authorization";
+import { Toast } from "./../utils/helpers";
+
 export default {
   data() {
     return {
       name: "",
       email: "",
       password: "",
-      passwordCheck: ""
+      passwordCheck: "",
+      isProcessing: false
     };
   },
   methods: {
-    handleSubmit() {
-      const data = JSON.stringify({
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        passwordCheck: this.passwordCheck
-      });
-      // TODO: 向後端驗證使用者註冊資訊是否合法
-      console.log("data", data);
+    async handleSubmit() {
+      try {
+        if (
+          !this.name ||
+          !this.email ||
+          !this.password ||
+          !this.passwordCheck
+        ) {
+          Toast.fire({
+            icon: "warning",
+            title: "請填入 name, email 和 password"
+          });
+          return;
+        }
+        if (this.password !== this.passwordCheck) {
+          Toast.fire({
+            icon: "warning",
+            title: "兩次輸入的密碼不一致！"
+          });
+          return;
+        }
+        this.isProcessing = true;
+
+        const { data, statusText } = await authorizationAPI.signUp({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          passwordCheck: this.passwordCheck
+        });
+
+        console.log(data);
+
+        if (statusText !== "OK" || data.status !== "success") {
+          throw new Error(data.message);
+        }
+
+        // STEP 4: 成功的話則轉址到 `/signin`
+        this.$router.push("/signin");
+      } catch (error) {
+        Toast.fire({
+          icon: "error",
+          title: "無法建立餐廳，請稍後再試"
+        });
+        this.isProcessing = false;
+      }
     }
   }
 };
