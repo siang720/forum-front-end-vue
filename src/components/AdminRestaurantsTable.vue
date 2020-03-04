@@ -97,9 +97,6 @@ export default {
           title: "無法刪除餐廳資料，請稍後再試"
         });
       }
-      // this.restaurants = this.restaurants.filter(
-      //   restaurant => restaurant.id !== restaurantId
-      // );
     }
   }
 };
