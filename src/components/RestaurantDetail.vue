@@ -69,6 +69,10 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import usersAPI from "../apis/users";
+import { Toast } from "../utils/helpers";
+
 export default {
   props: {
     initialRestaurant: {
@@ -81,6 +85,9 @@ export default {
       restaurant: this.initialRestaurant
     };
   },
+  computed: {
+    ...mapState(["currentUser"])
+  },
   watch: {
     initialRestaurant(restaurant) {
       this.restaurant = {
@@ -90,29 +97,81 @@ export default {
     }
   },
   methods: {
-    addFavorite() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isFavorited: true
-      };
+    async addFavorite() {
+      try {
+        const { data, statusText } = await usersAPI.addFavorite({
+          restaurantId: this.restaurant.id
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.restaurant = {
+          ...this.restaurant, // 保留餐廳內原有資料
+          isFavorited: true
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "暫時無法新增至最愛餐廳，請稍後再試"
+        });
+      }
     },
-    deleteFavorite() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isFavorited: false
-      };
+    async deleteFavorite() {
+      try {
+        const { data, statusText } = await usersAPI.deleteFavorite({
+          restaurantId: this.restaurant.id
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.restaurant = {
+          ...this.restaurant, // 保留餐廳內原有資料
+          isFavorited: false
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "暫時無法移除最愛餐廳，請稍後再試"
+        });
+      }
     },
-    addLike() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isLiked: true
-      };
+    async addLike() {
+      try {
+        const { data, statusText } = await usersAPI.addLike({
+          restaurantId: this.restaurant.id
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.restaurant = {
+          ...this.restaurant, // 保留餐廳內原有資料
+          isLiked: true
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "暫時無法收藏餐廳，請稍後再試"
+        });
+      }
     },
-    deleteLike() {
-      this.restaurant = {
-        ...this.restaurant, // 保留餐廳內原有資料
-        isLiked: false
-      };
+    async deleteLike() {
+      try {
+        const { data, statusText } = await usersAPI.deleteLike({
+          restaurantId: this.restaurant.id
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.restaurant = {
+          ...this.restaurant, // 保留餐廳內原有資料
+          isLiked: false
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "暫時無法移除收藏餐廳，請稍後再試"
+        });
+      }
     }
   }
 };

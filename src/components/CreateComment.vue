@@ -38,8 +38,7 @@ export default {
         // 向 API 發送 POST 請求
         const { data } = await commentsAPI.postComment({
           text: this.text,
-          restaurantId: this.restaurantId,
-          user: { id: this.currentUser.id }
+          restaurantId: this.restaurantId
         });
         if (data.status !== "success") {
           throw new Error(data.message);
