@@ -31,12 +31,17 @@
     </div>
     <div class="col-lg-8">
       <p>{{ restaurant.description }}</p>
-      <a class="btn btn-primary btn-border mr-2" href="#">Dashboard</a>
+      <router-link
+        :to="{ name: 'restaurant-dashboard', params: { id: restaurant.id } }"
+        class="btn btn-primary btn-border dashboard mr-2"
+      >
+        Dashboard
+      </router-link>
 
       <button
         v-if="restaurant.isFavorited"
         type="button"
-        class="btn btn-danger btn-border favorite mr-2"
+        class="btn btn-danger btn-border deletefavorite mr-2"
         @click.stop.prevent="deleteFavorite"
       >
         移除最愛
@@ -44,7 +49,7 @@
       <button
         v-else
         type="button"
-        class="btn btn-primary btn-border favorite mr-2"
+        class="btn btn-primary btn-border addfavorite mr-2"
         @click.stop.prevent="addFavorite"
       >
         加到最愛
@@ -52,7 +57,7 @@
       <button
         v-if="restaurant.isLiked"
         type="button"
-        class="btn btn-danger like mr-2"
+        class="btn btn-danger unlike mr-2"
         @click.stop.prevent="deleteLike"
       >
         Unlike
