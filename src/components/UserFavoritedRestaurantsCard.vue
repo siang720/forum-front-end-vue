@@ -8,7 +8,7 @@
         :to="{ name: 'restaurant', params: { id: FavoritedRestaurant.id } }"
       >
         <img
-          src="https://via.placeholder.com/60"
+          :src="FavoritedRestaurant.image | emptyImage"
           width="60"
           height="60"
           class="avatar mr-1 mb-1"
@@ -19,11 +19,13 @@
 </template>
 
 <script>
+import { emptyImageFilter } from "../utils/mixins";
 export default {
+  mixins: [emptyImageFilter],
   props: {
     FavoritedRestaurants: {
       type: Array,
-      required: true
+      default: () => []
     }
   }
 };

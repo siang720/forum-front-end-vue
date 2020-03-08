@@ -1,6 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header"><strong>32</strong> 已評論餐廳</div>
+    <div class="card-header">
+      <strong>{{ userComments.length }}</strong> 已評論餐廳
+    </div>
     <div class="card-body">
       <a href="/restaurants/1">
         <img
@@ -16,7 +18,7 @@
         :to="{ name: 'restaurant', params: { id: userComment.RestaurantId } }"
       >
         <img
-          src="https://via.placeholder.com/60"
+          :src="userComment.Restaurant.image | emptyImage"
           width="60"
           height="60"
           class="avatar mr-1 mb-1"
@@ -27,11 +29,13 @@
 </template>
 
 <script>
+import { emptyImageFilter } from "../utils/mixins";
 export default {
+  mixins: [emptyImageFilter],
   props: {
     userComments: {
       type: Array,
-      required: true
+      default: () => []
     }
   }
 };

@@ -10,7 +10,7 @@
         :to="{ name: 'user-profile', params: { id: userFollowing.id } }"
       >
         <img
-          src="https://via.placeholder.com/60"
+          :src="userFollowing.image | emptyImage"
           width="60"
           height="60"
           class="avatar mr-1 mb-1"
@@ -21,7 +21,9 @@
 </template>
 
 <script>
+import { emptyImageFilter } from "../utils/mixins";
 export default {
+  mixins: [emptyImageFilter],
   props: {
     userFollowings: {
       type: Array,
