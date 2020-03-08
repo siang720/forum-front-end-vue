@@ -34,15 +34,15 @@
                 v-if="user.isFollowed"
                 type="button"
                 class="btn btn-danger btn-border deletefollowing"
-                @click.stop.prevent="deleteFollowing"
+                @click.stop.prevent="deleteFollowing(user.profile.id)"
               >
-                追蹤
+                取消追蹤
               </button>
               <button
                 v-if="!user.isFollowed"
                 type="button"
                 class="btn btn-primary"
-                @click.stop.prevent="addFollowing"
+                @click.stop.prevent="addFollowing(user.profile.id)"
               >
                 追蹤
               </button>
@@ -62,16 +62,9 @@
 
 <script>
 import { emptyImageFilter } from "../utils/mixins";
-const dummyUser = {
-  currentUser: {
-    id: 1,
-    name: "管理者",
-    email: "root@example.com",
-    image: "https://i.pravatar.cc/300",
-    isAdmin: true
-  },
-  isAuthenticated: true
-};
+import { mapState } from "vuex";
+import { Toast } from "../utils/helpers";
+import usersAPI from "../apis/users";
 
 export default {
   mixins: [emptyImageFilter],
@@ -83,23 +76,50 @@ export default {
   },
   data() {
     return {
-      currentUser: dummyUser.currentUser,
       user: this.initialUser
     };
   },
+  computed: {
+    ...mapState(["currentUser", "isAuthenticated"])
+  },
   methods: {
-    addFollowing() {
-      console.log(this.currentUser.id);
-      this.user = {
-        ...this.user, // 保留餐廳內原有資料
-        isFollowed: !this.user.isFollowed
-      };
+    async addFollowing(userId) {
+      try {
+        const { data, statusText } = await usersAPI.addFollowing({
+          userId
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.user = {
+          ...this.user, // 保留餐廳內原有資料
+          isFollowed: true
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法追蹤該使用者，請稍後再試！"
+        });
+      }
     },
-    deleteFollowing() {
-      this.user = {
-        ...this.user, // 保留餐廳內原有資料
-        isFollowed: !this.user.isFollowed
-      };
+    async deleteFollowing(userId) {
+      try {
+        const { data, statusText } = await usersAPI.deleteFollowing({
+          userId
+        });
+        if (data.status !== "success") {
+          throw new Error(statusText);
+        }
+        this.user = {
+          ...this.user, // 保留餐廳內原有資料
+          isFollowed: false
+        };
+      } catch (error) {
+        Toast.fire({
+          icon: "warning",
+          title: "無法取消追蹤該使用者，請稍後再試！"
+        });
+      }
     }
   }
 };
