@@ -23,6 +23,11 @@
         :current-page="currentPage"
         :total-page="totalPage"
       />
+
+      <!-- 無資料時顯示提示文字 -->
+      <div v-if="restaurants.length < 1">
+        此類別目前沒有餐廳資料
+      </div>
     </template>
   </div>
 </template>
