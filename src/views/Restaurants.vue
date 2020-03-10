@@ -1,26 +1,29 @@
 <template>
   <div class="container py-5">
     <NavTabs />
-    <h1 class="mt-5">首頁 - 餐廳列表</h1>
-    <!-- 餐廳類別標籤 RestaurantsNavPills -->
-    <RestaurantsNavPills :categories="categories" />
+    <Spinner v-if="isLoading" />
+    <template v-else>
+      <h1 class="mt-5">首頁 - 餐廳列表</h1>
+      <!-- 餐廳類別標籤 RestaurantsNavPills -->
+      <RestaurantsNavPills :categories="categories" />
 
-    <div class="row">
-      <!-- 餐廳卡片 RestaurantCard-->
-      <RestaurantCard
-        v-for="restaurant in restaurants"
-        :key="restaurant.id"
-        :initial-restaurant="restaurant"
+      <div class="row">
+        <!-- 餐廳卡片 RestaurantCard-->
+        <RestaurantCard
+          v-for="restaurant in restaurants"
+          :key="restaurant.id"
+          :initial-restaurant="restaurant"
+        />
+      </div>
+
+      <!-- 分頁標籤 RestaurantPagination -->
+      <RestaurantPagination
+        v-if="totalPage > 1"
+        :category-id="categoryId"
+        :current-page="currentPage"
+        :total-page="totalPage"
       />
-    </div>
-
-    <!-- 分頁標籤 RestaurantPagination -->
-    <RestaurantPagination
-      v-if="totalPage > 1"
-      :category-id="categoryId"
-      :current-page="currentPage"
-      :total-page="totalPage"
-    />
+    </template>
   </div>
 </template>
 
@@ -32,13 +35,15 @@ import RestaurantPagination from "../components/RestaurantsPagination";
 // STEP 1：透過 import 匯入剛剛撰寫好用來呼叫 API 的方法
 import restaurantsAPI from "./../apis/restaurants";
 import { Toast } from "./../utils/helpers";
+import Spinner from "../components/Spinner";
 
 export default {
   components: {
     NavTabs,
     RestaurantCard,
     RestaurantsNavPills,
-    RestaurantPagination
+    RestaurantPagination,
+    Spinner
   },
   data() {
     return {
@@ -46,7 +51,8 @@ export default {
       categoryId: undefined,
       currentPage: 1,
       restaurants: [],
-      totalPage: undefined
+      totalPage: undefined,
+      isLoading: true
     };
   },
   created() {
@@ -81,7 +87,9 @@ export default {
         this.currentPage = data.page;
         this.restaurants = data.restaurants;
         this.totalPage = data.totalPage.length;
+        this.isLoading = false;
       } catch (error) {
+        this.isLoading = false;
         Toast.fire({
           icon: "error",
           title: "無法取得餐廳資料，請稍後再試"
